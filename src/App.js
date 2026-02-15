@@ -1,11 +1,13 @@
-import Home from './pages/home'
+import Home from './pages/home';
+import SelectStack from './pages/selectStack';
 // import '';
 
 function App() {
   return (
     // <div className="min-h-screen bg-grid">
     <div className='min-h-screen bg-[#0e121a] bg-grid'>
-      <Home />
+      {/* <Home /> */}
+      <SelectStack />
     </div>
   );
 }
