@@ -20,7 +20,7 @@ function Questions() {
     <div className='h-screen flex justify-center items-center'>
       <div className="w-[45%]">
         <div className="flex justify-between text-[#7589a3] text-base mb-5">
-            <div> JavaScript </div>
+            <div> {techStacks[0].name} </div>
             <div> {currnumber + 1} / {reactQuestion.length} </div>
         </div>
 
