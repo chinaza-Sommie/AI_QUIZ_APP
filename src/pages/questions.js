@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { techStacks } from "../datasets/stackData";
 import { reactQuestion } from "../datasets/stackData";
 // import '';
@@ -12,8 +13,33 @@ function Questions() {
     const [currnumber, setCurrnumber] = useState(0);
     const currquestion = reactQuestion[currnumber];
     const [answers, setAnswers] = useState({});
+    const moveToAnsStorage = (questionID, selectedIndex) => {
+        // for each question selected:
+        // 1. get the id, answers selected (this should be the element index)
+        // 2. set it to the answers storage
+        setAnswers((prev) => ({
+            ...prev,
+             [questionID]: selectedIndex
+        }))
+    }
 
+    const scoreAnswers = () => {
+        // loop through the questions array
+        // {0: 1; 1: 2}
+        let scores = 0;
+        reactQuestion.forEach((question) => {
+            const eachAnswer = answers[question.id];
 
+            if(question.correctIndex === eachAnswer){
+                scores += 10;
+            }else{
+                scores += 0
+            }
+        })
+        console.log(scores);
+        return scores;
+    }
+    
     
     
   return (
@@ -29,7 +55,7 @@ function Questions() {
 
             <div className="mt-5">
                 { currquestion.options.map((option,index) => (
-                    <div key={index} tabIndex={0} className="flex mt-2 bg-[#161b24] border border-[#202531] px-5 py-4 text-lg text-[#7589a3] rounded-lg transition delay-150 duration-300 ease-in-out hover:bg-inherit hover:cursor-pointer focus:border-[#7056f6]">
+                    <div key={index} tabIndex={0} onClick={() => moveToAnsStorage(currquestion.id, index)} className="flex mt-2 bg-[#161b24] border border-[#202531] px-5 py-4 text-lg text-[#7589a3] rounded-lg transition delay-150 duration-300 ease-in-out hover:bg-inherit hover:cursor-pointer focus:border-[#7056f6]">
                         <div className="mr-3">
                             <p className="bg-[#202531] px-2 rounded-lg"> {String.fromCharCode(65 + index)} </p>
                         </div>
@@ -49,6 +75,7 @@ function Questions() {
                 className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Next </button>
             ) : (
                 <button
+                onClick={() => scoreAnswers()}
                 className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Submit </button>
             ) }
         </div>
