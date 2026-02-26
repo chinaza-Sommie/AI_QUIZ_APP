@@ -1,5 +1,5 @@
 
-// import '';
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -8,7 +8,9 @@ function Home() {
         <div className="text-[#7056f6] font-bold text-3xl mb-3"> {'</>'}  </div>
         <h1 className="text-white font-bold text-3xl mb-3">DevQuiz</h1>
         <p className="text-[#7589a3] text-lg mb-8"> Test Your Web Dev Knowledge </p>
-        <button className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md "> Get Started </button>
+        <Link to={"/select"}>
+            <button className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md "> Get Started </button>
+        </Link>
       </div>
     </div>
   );
