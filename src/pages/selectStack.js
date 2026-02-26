@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { techStacks } from "../datasets/stackData";
+import { useState } from "react";
 // import '';
 
 function SelectStack() {
+  const [selected, setSelected] = useState("")
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className="text-center w-[48%]"> 
