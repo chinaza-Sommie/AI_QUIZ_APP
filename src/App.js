@@ -4,16 +4,22 @@ import SelectStack from './pages/selectStack';
 import Questions from './pages/questions';
 import Layout from './pages/layout';
 import Results from './pages/results';
+import { useState, useEffect } from 'react';
 // import '';
 
 function App() {
+  const [selected, setSelected] = useState("")
+
+  useEffect(() => {
+    console.log(selected)
+  }, [selected])
   return (
     // <div className="min-h-screen bg-grid">
     <BrowserRouter>
       <Routes>
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
-          <Route path="/select" element={<SelectStack/>} />
+          <Route path="/select" element={<SelectStack setSelected={setSelected} />} />
           <Route path="/questions" element={<Questions/>} />
           <Route path="/results" element={<Results/>} />
         </Route>
