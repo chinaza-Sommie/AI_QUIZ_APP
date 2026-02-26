@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { techStacks } from "../datasets/stackData";
 import { useState } from "react";
 // import '';
 
-function SelectStack() {
-  const [selected, setSelected] = useState("")
+function SelectStack({setSelected}) {
+  const navigate = useNavigate();
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className="text-center w-[48%]"> 
@@ -13,10 +13,14 @@ function SelectStack() {
             <p className="text-[#7589a3] text-base"> Pick a technology to get quizzed on</p>
         </div>
         <div className="grid grid-cols-2 gap-4">
+            {/* 
+             set the selected state with the stack name onclick
+             pass it back to the parent/root (prop drilling)
 
+            */}
             {
                 techStacks.map((stack) => (
-                    <div className="bg-[#151923] border border-[#7589a3] text-center py-8 px-5 rounded rounded-lg tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:shadow-xl/20 hover:shadow-[#7056f6] hover:border-[#7056f6]">
+                    <div onClick={() => {setSelected(stack.name); navigate("/questions")}} className="bg-[#151923] border border-[#7589a3] text-center py-8 px-5 rounded rounded-lg tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:shadow-xl/20 hover:shadow-[#7056f6] hover:border-[#7056f6]">
                         <div className="text-[#7056f6] font-bold text-xl mb-3"> {'</>'} </div>
                         <h1 className="text-white text-xl mb-3">{stack.name}</h1>
                         <p className="text-[#7589a3] text-base"> {stack.description} </p>
