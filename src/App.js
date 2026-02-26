@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 // import '';
 
 function App() {
-  const [selected, setSelected] = useState("")
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     console.log(selected)
@@ -19,8 +19,8 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
-          <Route path="/select" element={<SelectStack setSelected={setSelected} />} />
-          <Route path="/questions" element={<Questions/>} />
+          <Route path="/select" element={<SelectStack setSelected={setSelected} selected={selected} />} />
+          <Route path="/questions/:selected" element={<Questions/>} />
           <Route path="/results" element={<Results/>} />
         </Route>
       </Routes>

@@ -3,8 +3,13 @@ import { techStacks } from "../datasets/stackData";
 import { useState } from "react";
 // import '';
 
-function SelectStack({setSelected}) {
+function SelectStack({setSelected, selected}) {
   const navigate = useNavigate();
+
+  const handleSelectStack = (stackName) => {
+    setSelected(stackName);
+    navigate(`/questions/${stackName}`)
+  }
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className="text-center w-[48%]"> 
@@ -20,7 +25,7 @@ function SelectStack({setSelected}) {
             */}
             {
                 techStacks.map((stack) => (
-                    <div onClick={() => {setSelected(stack.name); navigate("/questions")}} className="bg-[#151923] border border-[#7589a3] text-center py-8 px-5 rounded rounded-lg tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:shadow-xl/20 hover:shadow-[#7056f6] hover:border-[#7056f6]">
+                    <div onClick={() => handleSelectStack(stack.id)} className="bg-[#151923] border border-[#7589a3] text-center py-8 px-5 rounded rounded-lg tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:shadow-xl/20 hover:shadow-[#7056f6] hover:border-[#7056f6]">
                         <div className="text-[#7056f6] font-bold text-xl mb-3"> {'</>'} </div>
                         <h1 className="text-white text-xl mb-3">{stack.name}</h1>
                         <p className="text-[#7589a3] text-base"> {stack.description} </p>
