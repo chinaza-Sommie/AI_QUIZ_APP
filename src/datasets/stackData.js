@@ -26,7 +26,11 @@ export const techStacks  = [
 ]
 
 export const reactQuestion = [
-    { id: 1, question: "What hook is used to manage state in a functional component?", options: ["useEffect", "useState", "useContext", "useReducer"], correctIndex: 1 },
+    { id: 1,
+        question: "What hook is used to manage state in a functional component?", 
+        options: ["useEffect", "useState", "useContext", "useReducer"], 
+        correctIndex: 1 
+    },
     { id: 2, question: "What does JSX stand for?", options: ["JavaScript XML", "Java Syntax Extension", "JSON XML", "JavaScript Extension"], correctIndex: 0 },
     { id: 3, question: "Which method is used to render a React element into the DOM?", options: ["ReactDOM.render()", "React.create()", "React.mount()", "ReactDOM.append()"], correctIndex: 0 },
     { id: 4, question: "What is the purpose of useEffect?", options: ["Manage state", "Handle side effects", "Create context", "Optimize rendering"], correctIndex: 1 },
@@ -38,6 +42,8 @@ export const reactQuestion = [
     { id: 10, question: "What is the correct way to update state based on previous state?", options: ["setState(newValue)", "setState(prev => newValue)", "state = newValue", "this.state = newValue"], correctIndex: 1 },
 
 ]
+
+
 
 // export const questionStack = {
 //     react: reactQuestion,

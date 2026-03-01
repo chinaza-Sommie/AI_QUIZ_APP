@@ -1,43 +1,30 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
-import { techStacks } from "../datasets/stackData";
-import { reactQuestion } from "../datasets/stackData";
+import { useNavigate, useParams } from "react-router-dom"
+import { techStacks, reactQuestion } from "../datasets/stackData";
 // import '';
 
-function Questions() {
-    // fetch the questions using an array number eg: question[currnumber]
-    // loop through the current questions list
-    // store the answers selected in an object
-    // increment the currnumber count when user clicks next and move to the next
-    
+function Questions({scores, setScores, answers, setAnswers}) {
+    const navigate = useNavigate();
+    const { selected } = useParams();
     const [currnumber, setCurrnumber] = useState(0);
     const currquestion = reactQuestion[currnumber];
-    const [answers, setAnswers] = useState({});
+    const checkStack = techStacks.find((stack) => stack.id === selected)
+    
+    useEffect(() => {
+        if(!checkStack && reactQuestion.length != 0){
+            navigate("/");
+        }
+    }, [checkStack, reactQuestion]);
+
     const moveToAnsStorage = (questionID, selectedIndex) => {
-        // for each question selected:
-        // 1. get the id, answers selected (this should be the element index)
-        // 2. set it to the answers storage
         setAnswers((prev) => ({
             ...prev,
              [questionID]: selectedIndex
         }))
     }
 
-    const scoreAnswers = () => {
-        // loop through the questions array
-        // {0: 1; 1: 2}
-        let scores = 0;
-        reactQuestion.forEach((question) => {
-            const eachAnswer = answers[question.id];
-
-            if(question.correctIndex === eachAnswer){
-                scores += 10;
-            }else{
-                scores += 0
-            }
-        })
-        console.log(scores);
-        return scores;
+    const submitAnswers = () =>{
+        navigate('/results')
     }
     
     
@@ -46,7 +33,7 @@ function Questions() {
     <div className='h-screen flex justify-center items-center'>
       <div className="w-[45%]">
         <div className="flex justify-between text-[#7589a3] text-base mb-5">
-            <div> {techStacks[0].name} </div>
+            <div className="capitalize"> {checkStack.name} </div>
             <div> {currnumber + 1} / {reactQuestion.length} </div>
         </div>
 
@@ -75,7 +62,7 @@ function Questions() {
                 className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Next </button>
             ) : (
                 <button
-                onClick={() => scoreAnswers()}
+                onClick={() => submitAnswers()}
                 className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Submit </button>
             ) }
         </div>
