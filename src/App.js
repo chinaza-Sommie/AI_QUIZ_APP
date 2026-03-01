@@ -9,10 +9,8 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [selected, setSelected] = useState("");
+  const [answers, setAnswers] = useState({});
 
-  useEffect(() => {
-    console.log(selected)
-  }, [selected])
   return (
     // <div className="min-h-screen bg-grid">
     <BrowserRouter>
@@ -20,8 +18,8 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
           <Route path="/select" element={<SelectStack setSelected={setSelected} selected={selected} />} />
-          <Route path="/questions/:selected" element={<Questions/>} />
-          <Route path="/results" element={<Results/>} />
+          <Route path="/questions/:selected" element={<Questions answers={answers} setAnswers={setAnswers} />} />
+          <Route path="/results" element={<Results answers={answers} setAnswers={setAnswers}/>} />
         </Route>
       </Routes>
     </BrowserRouter>
