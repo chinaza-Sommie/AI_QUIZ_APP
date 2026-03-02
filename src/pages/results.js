@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { reactQuestion } from "../datasets/stackData";
+import { useNavigate } from "react-router-dom";
+import { reactQuestion, analysisData } from "../datasets/stackData";
 
 function Results({answers, setAnswers}) {
   const navigate = useNavigate();
   const [scores, setScores] = useState(0);
+  const analysis_Datas = analysisData[0];
 
   useEffect(()=> {
     if(!answers || Object.keys(answers).length === 0){
@@ -23,18 +24,18 @@ function Results({answers, setAnswers}) {
       }
     })
     setScores(curr_score);
+    
   }, [answers, navigate]);
 
   const calculateCorrectAnswers = () => {
     const total_correct_answers = scores / reactQuestion.length;
-    console.log(total_correct_answers)
     return total_correct_answers;
   }
   
 
   return (
      <div className='flex justify-center items-center py-10'>
-      <div className="w-[45%]">
+      <div className="w-[80%] md:w-[45%]">
 
         {/* top section */}
         <div className="bg-[#151923] text-center border border-[#202531] py-12 rounded-xl">
@@ -50,9 +51,12 @@ function Results({answers, setAnswers}) {
 
         {/* question review */}
         <div className="bg-[#151923] border border-[#202531] p-10 mt-5 rounded-xl">
-            <h3 className="text-white text-2xl font-bold mb-5"> Review Answers</h3>
+            <div className="flex  justify-between items-center">
+              <h3 className="text-white text-2xl font-semibold mb-5"> Review Answers</h3>
+              <p className="text-white text-lg font-semibold mb-5 px-4 py-1 rounded-md bg-[#7056f6] hover:cursor-pointer"> Performance Analysis</p>
+            </div>
             
-            <div>
+            <div className="hidden">
               {
                 reactQuestion.map((eachQuestion, index) => {
                   const selectedAnswer = answers[index+1];
@@ -74,6 +78,24 @@ function Results({answers, setAnswers}) {
                   )       
                 })
               }
+            </div>
+            
+        </div>
+
+        <div className="bg-[#151923] border border-[#202531] p-10 mt-5 rounded-xl">
+            <h3 className="text-white text-2xl font-semibold mb-5"> Performance Analysis</h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-5">
+              {analysis_Datas.concepts.map((concept, index) => (
+                <div key={index} className="bg-[#191a22] border border-[#202531] px-5 py-3 mb-5 rounded-xl text-[#7689a4]">
+                  {concept}
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-[#1c1c2f] border border-[#2e295c] rounded-xl px-5 py-3">
+              <h3 className="text-[#6f55f4] text-lg font-semibold mb-2"> Recommendation</h3>
+              <p className="text-[#7689a4] text-sm"> {analysis_Datas.recommendation} </p>
             </div>
         </div>
       </div>
