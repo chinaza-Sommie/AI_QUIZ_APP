@@ -43,7 +43,10 @@ export const reactQuestion = [
 
 ]
 
-
+export const analysisData = [{
+    concepts: ["useCallback", "useMemo", "JSON.parse()"],
+    recommendation: "You have an understanding of the foundation on Javascript but the above areas need attention."
+}]
 
 // export const questionStack = {
 //     react: reactQuestion,

@@ -9,12 +9,13 @@ function Questions({scores, setScores, answers, setAnswers}) {
     const [currnumber, setCurrnumber] = useState(0);
     const currquestion = reactQuestion[currnumber];
     const checkStack = techStacks.find((stack) => stack.id === selected)
-    
+    const isAnswered = answers[currquestion.id] !== undefined;
+
     useEffect(() => {
-        if(!checkStack && reactQuestion.length != 0){
+        if(!checkStack && reactQuestion.length !== 0){
             navigate("/");
         }
-    }, [checkStack, reactQuestion]);
+    }, [checkStack, navigate]);
 
     const moveToAnsStorage = (questionID, selectedIndex) => {
         setAnswers((prev) => ({
@@ -55,15 +56,19 @@ function Questions({scores, setScores, answers, setAnswers}) {
         </div>
 
         <div className="flex justify-between items-center pt-4">
-            <button className="text-base text-[#7589a3] py-2 px-6 tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:text-white "> Quit </button>
+            <button className="text-base text-white py-2 px-6 bg-[#ef4343] rounded-md tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:text-white "> Quit </button>
             { currnumber < (reactQuestion.length - 1)  ? (
-                <button 
+                <button
+                disabled={!isAnswered}
                 onClick={()=> ( setCurrnumber(currnumber + 1))}
-                className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Next </button>
+                className={`text-base py-2 px-6 rounded rounded-md
+                    ${!isAnswered ? "bg-[#191a22] text-[#7589a3] border border-[#7589a3] cursor-not-allowed ": "bg-[#7056f6] text-white hover:cursor-pointer"}`}> Next </button>
             ) : (
                 <button
+                disabled={!isAnswered}
                 onClick={() => submitAnswers()}
-                className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md hover:cursor-pointer"> Submit </button>
+                className={`text-base py-2 px-6 rounded rounded-md
+                    ${!isAnswered ? "bg-[#191a22] text-[#7589a3] border border-[#7589a3] cursor-not-allowed ": "bg-[#7056f6] text-white hover:cursor-pointer"}`}> Submit </button>
             ) }
         </div>
       </div>
