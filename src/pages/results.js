@@ -56,7 +56,7 @@ function Results({answers, setAnswers}) {
               <p className="text-white text-lg font-semibold mb-5 px-4 py-1 rounded-md bg-[#7056f6] hover:cursor-pointer"> Performance Analysis</p>
             </div>
             
-            <div className="hidden">
+            <div>
               {
                 reactQuestion.map((eachQuestion, index) => {
                   const selectedAnswer = answers[index+1];
