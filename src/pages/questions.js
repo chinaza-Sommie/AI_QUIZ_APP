@@ -43,7 +43,10 @@ function Questions({scores, setScores, answers, setAnswers}) {
 
             <div className="mt-5">
                 { currquestion.options.map((option,index) => (
-                    <div key={index} tabIndex={0} onClick={() => moveToAnsStorage(currquestion.id, index)} className="flex mt-2 bg-[#161b24] border border-[#202531] px-5 py-4 text-lg text-[#7589a3] rounded-lg transition delay-150 duration-300 ease-in-out hover:bg-inherit hover:cursor-pointer focus:border-[#7056f6]">
+                    <div key={index} tabIndex={0} onClick={() => moveToAnsStorage(currquestion.id, index)} 
+                    className={`flex mt-2 bg-[#161b24] px-5 py-4 text-lg text-[#7589a3] rounded-lg transition delay-150 duration-300 ease-in-out hover:bg-inherit hover:cursor-pointer
+                    ${answers[currquestion.id] === index ? "border border-[#7056f6]" : "border border-[#202531]"
+                    }`}>
                         <div className="mr-3">
                             <p className="bg-[#202531] px-2 rounded-lg"> {String.fromCharCode(65 + index)} </p>
                         </div>
