@@ -9,7 +9,7 @@ function Home() {
         <h1 className="text-white font-bold text-3xl mb-3">DevQuiz</h1>
         <p className="text-[#7589a3] text-lg mb-8"> Test Your Web Dev Knowledge </p>
         <Link to={"/select"}>
-            <button className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md "> Get Started </button>
+            <button className="bg-[#7056f6] text-base text-white py-2 px-6 rounded rounded-md tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:bg-[#5f47d8] "> Get Started </button>
         </Link>
       </div>
     </div>
