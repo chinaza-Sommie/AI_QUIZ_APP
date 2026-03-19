@@ -1,14 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
-import { techStacks } from "../datasets/stackData";
-import { useState } from "react";
+// import { techStacks } from "../datasets/stackData";
+import { useEffect, useState } from "react";
 // import '';
 
 function SelectStack({setSelected, selected}) {
   const navigate = useNavigate();
+  const [techStacks, setTechStacks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/stacks")
+    .then((result) => result.json())
+    .then((data) => setTechStacks(data))
+    .catch((error) => {
+      console.log(error)
+      alert("⚠️ Unable to load stacks. The server might be down.");
+      navigate("/")
+    })
+  }, [])
 
   const handleSelectStack = (stackName) => {
     setSelected(stackName);
-    navigate(`/questions/${stackName}`)
+    navigate(`/select/${stackName}`)
   }
   return (
     <div className='h-screen flex justify-center items-center'>

@@ -48,6 +48,34 @@ export const analysisData = [{
     recommendation: "You have an understanding of the foundation on Javascript but the above areas need attention."
 }]
 
+// response_format: {
+//     type: "json_schema",
+//     json_schema: {
+//       stack: "question_stack",
+//       schema: {
+//         type: "array",
+//         items: {
+//             type: "object",
+//             properties: {
+//             id: { type: "number" },
+//             question: { type: "string" },
+//             options: { 
+//                 type: "array",
+//                 items: { type: "string"}
+//             }
+//             correctIndex: {type:"number"}
+//             },
+//         required: ["id","questions","options"]
+//         }
+//       }
+//     }
+//   }
+
+//notes: 
+// 1. responses should on the backend
+// 2. connect DB
+// create backend
+
 // export const questionStack = {
 //     react: reactQuestion,
 //     javscript: reactQuestion,

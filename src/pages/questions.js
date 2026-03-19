@@ -1,21 +1,34 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
-import { techStacks, reactQuestion } from "../datasets/stackData";
-// import '';
+import { useNavigate, useParams } from "react-router-dom";
 
 function Questions({scores, setScores, answers, setAnswers}) {
     const navigate = useNavigate();
     const { selected } = useParams();
     const [currnumber, setCurrnumber] = useState(0);
-    const currquestion = reactQuestion[currnumber];
-    const checkStack = techStacks.find((stack) => stack.id === selected)
-    const isAnswered = answers[currquestion.id] !== undefined;
-
+    const [questions, setQuestions] = useState([])
+    const currquestion = questions[currnumber];
+    const isAnswered = answers[currquestion?.id] !== undefined;
+    
     useEffect(() => {
-        if(!checkStack && reactQuestion.length !== 0){
+        if(!selected){
             navigate("/");
         }
-    }, [checkStack, navigate]);
+    }, [selected, navigate]);
+
+
+
+    useEffect(() => {
+        fetch(`http://127.0.0.1:5000/questions?stack=${selected}`)
+        .then((result) => result.json())
+        .then((data) => {
+            setQuestions(data)
+        })
+        .catch((error) => {
+        console.log(error)
+        // alert("⚠️ Unable to load stacks. The server might be down.");
+        // navigate("/")
+        })
+    }, [])
 
     const moveToAnsStorage = (questionID, selectedIndex) => {
         setAnswers((prev) => ({
@@ -28,14 +41,16 @@ function Questions({scores, setScores, answers, setAnswers}) {
         navigate('/results')
     }
     
-    
+    if (questions.length === 0) {
+        return <div>Loading questions...</div>;
+    }
     
   return (
     <div className='h-screen flex justify-center items-center'>
       <div className="w-[45%]">
         <div className="flex justify-between text-[#7589a3] text-base mb-5">
-            <div className="capitalize"> {checkStack.name} </div>
-            <div> {currnumber + 1} / {reactQuestion.length} </div>
+            <div className="capitalize"> {selected} </div>
+            <div> {currnumber + 1} / {questions.length} </div>
         </div>
 
         <div className="bg-[#151923] border border-[#202531] p-8 rounded-xl">
@@ -60,7 +75,7 @@ function Questions({scores, setScores, answers, setAnswers}) {
 
         <div className="flex justify-between items-center pt-4">
             <button className="text-base text-white py-2 px-6 bg-[#ef4343] rounded-md tansition delay-150 duration-300 ease-in-out hover:cursor-pointer hover:text-white "> Quit </button>
-            { currnumber < (reactQuestion.length - 1)  ? (
+            { currnumber < (questions.length - 1)  ? (
                 <button
                 disabled={!isAnswered}
                 onClick={()=> ( setCurrnumber(currnumber + 1))}
