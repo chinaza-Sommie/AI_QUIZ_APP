@@ -18,7 +18,7 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
           <Route path="/select" element={<SelectStack setSelected={setSelected} selected={selected} />} />
-          <Route path="/questions/:selected" element={<Questions answers={answers} setAnswers={setAnswers} />} />
+          <Route path="/select/:selected" element={<Questions answers={answers} setAnswers={setAnswers} />} />
           <Route path="/results" element={<Results answers={answers} setAnswers={setAnswers}/>} />
         </Route>
       </Routes>

@@ -53,7 +53,7 @@ function Results({answers, setAnswers}) {
         <div className="bg-[#151923] border border-[#202531] p-10 mt-5 rounded-xl">
             <div className="flex  justify-between items-center">
               <h3 className="text-white text-2xl font-semibold mb-5"> Review Answers</h3>
-              <p className="text-white text-lg font-semibold mb-5 px-4 py-1 rounded-md bg-[#7056f6] hover:cursor-pointer"> Performance Analysis</p>
+              <p className="text-white text-base font-semibold mb-5 px-4 py-2 rounded-md bg-[#7056f6] hover:cursor-pointer hover:bg-[#5f47d8]"> Performance Analysis</p>
             </div>
             
             <div>
