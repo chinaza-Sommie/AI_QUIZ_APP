@@ -25,7 +25,17 @@ This could work in two ways;
 ### `To Run Locally`
 
 Follow the steps below:
-// to update as the project progresses
+-Clone repositories
+-Terminal commands are as follows (For Frontend):
+--cd frontend
+--npm install
+--npm start
+
+--Terminal commands are as follows (For Frontend):
+--cd ..
+--cd ai-quiz-app-backend
+--pip install -r requirements.txt
+--python3 app.py
 <br/> <br/>
 ## Video Demo
 // Not available just yet 
