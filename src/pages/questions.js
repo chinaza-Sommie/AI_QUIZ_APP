@@ -13,6 +13,8 @@ function Questions({scores, setScores, answers, setAnswers}) {
         if(!selected){
             navigate("/");
         }
+
+        console.log(selected);
     }, [selected, navigate]);
 
 
